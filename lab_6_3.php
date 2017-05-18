@@ -1,6 +1,6 @@
 <?php
   include "readFromDb.php";
-  include_once "../configs/config_for_lab5.php";
+  include_once "../configs/config_for_lab6.php";
   $data = array();
   $lecturers = array();
   $mysqli = new mysqli($link,$username,$password,$dbname);
@@ -21,8 +21,12 @@
               );
   $lecturers = readFromDb($mysqli,
                           true,
-                          array("FirstName", "SecondName"),
-                          "lector"
+                          array("lector.FirstName", "lector.SecondName"),
+                          "subject",
+                          array(
+                            "LEFT JOIN " => Left_Join("lector",
+                              array("subject.IdLector" => "lector.IdLector"))
+                          )
                           );
   $lecturers[] = count($lecturers);
   $mysqli->close();

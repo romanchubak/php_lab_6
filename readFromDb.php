@@ -31,7 +31,7 @@
                 else $sql .= $value . " ";
             }
         }
-        echo $sql;
+        //echo $sql;
         $result = $mysqli->query($sql);
         $data = $result->fetch_all();
         return $data;
